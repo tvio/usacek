@@ -12,9 +12,7 @@ var controller_1 = require("./controller");
 var app = express_1.default();
 // The port the express app will listen on
 var port = 3000;
-// Mount the WelcomeController at the /welcome route
-//app.use('/welcome', Controller);
-//data
+// Mount the WelcomeController at the / route
 app.use('/', controller_1.Controller);
 // Serve the application at the given port
 app.listen(port, function () {

@@ -11,10 +11,9 @@ const app: express.Application = express();
 // The port the express app will listen on
 const port: number = 3000;
 
-// Mount the WelcomeController at the /welcome route
-//app.use('/welcome', Controller);
 
-//data
+
+// Mount the WelcomeController at the / route
 app.use('/', Controller);
 
 // Serve the application at the given port
@@ -22,3 +21,4 @@ app.listen(port, () => {
     // Success callback
     console.log(`Listening at http://localhost:${port}/`);
 });
+
