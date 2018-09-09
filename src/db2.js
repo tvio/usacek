@@ -34,6 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var Client = require('pg').Client;
 var config = {
     user: 'test',
@@ -46,7 +47,7 @@ var config = {
 };
 var client = new Client(config);
 client.connect();
-function main() {
+function select() {
     return __awaiter(this, void 0, void 0, function () {
         var resp, err_1;
         return __generator(this, function (_a) {
@@ -69,4 +70,4 @@ function main() {
         });
     });
 }
-main();
+exports.default = select;

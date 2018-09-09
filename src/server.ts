@@ -3,6 +3,7 @@
 // Import everything from express and assign it to the express variable
 import express from 'express';
 
+
 // Import WelcomeController from controllers entry point
 import {Controller} from './controller';
 
@@ -15,6 +16,11 @@ const port: number = 3000;
 
 // Mount the WelcomeController at the / route
 app.use('/', Controller);
+//pubic folder
+const path = require ('path');
+const publicPath = path.join(__dirname,'../public');
+app.use(express.static(publicPath));
+
 
 // Serve the application at the given port
 app.listen(port, () => {

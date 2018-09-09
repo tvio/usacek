@@ -3,7 +3,8 @@
 // Import only what we need from express
 import { Router, Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import {insert,select,update} from "./db";
+import select from "./db2";
+import {dny} from "./data";
 // Assign router to the express.Router() instance
 const router: Router = Router();
 
@@ -16,23 +17,32 @@ const jsonParser = bodyParser.json();
 // In this case it's /welcome
 // rpidej body parser
 
-router.post('/usacek',jsonParser, (req: Request, res: Response) => {
-    //nacti data z requestu
-    if (!req.body) return res.status(400);
-     let data = req.body;
-    console.log(data);
-    // pridat do db pomoci funkce a vypsat zpet na obr.
-    data = res.send(insert(data));
+// router.post('/usacek',jsonParser, (req: Request, res: Response) => {
+//     //nacti data z requestu
+//     if (!req.body) return res.status(400);
+//      let data = req.body;
+//     console.log(data);
+//     // pridat do db pomoci funkce a vypsat zpet na obr.
+//     data = res.send(insert(data));
    
     
-});
+// });
 
 
-router.get('/usacek', (req: Request, res: Response) => {
+// router.get('/usacek', (req: Request, res: Response) => {
+//      //if (data) return res.send({"data":"no records"});
+//      console.log(select());
+//     res.send(select());
+// });
+
+router.get('/', (req: Request, res: Response) => {
      //if (data) return res.send({"data":"no records"});
      console.log(select());
-    res.send(select());
+     res.setHeader('Content-Type', 'application/json');
+    // res.send(select());
+    res.send(JSON.stringify(dny));
 });
+
 
 // router.get('/:name', (req: Request, res: Response) => {
 //     // Extract the name from the request parameters

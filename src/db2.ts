@@ -14,7 +14,7 @@ const config = {
 const client = new Client(config);
 
 client.connect();
-async function main() {
+async function select() {
     
     try {
       
@@ -26,5 +26,5 @@ async function main() {
     }
     client.end();
   }
+export default select;
   
-  main();

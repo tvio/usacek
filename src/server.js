@@ -14,6 +14,10 @@ var app = express_1.default();
 var port = 3000;
 // Mount the WelcomeController at the / route
 app.use('/', controller_1.Controller);
+//pubic folder
+var path = require('path');
+var publicPath = path.join(__dirname, '../public');
+app.use(express_1.default.static(publicPath));
 // Serve the application at the given port
 app.listen(port, function () {
     // Success callback

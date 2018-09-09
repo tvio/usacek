@@ -7,7 +7,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Import only what we need from express
 var express_1 = require("express");
 var body_parser_1 = __importDefault(require("body-parser"));
-var db_1 = require("./db");
+var db2_1 = __importDefault(require("./db2"));
+var data_1 = require("./data");
 // Assign router to the express.Router() instance
 var router = express_1.Router();
 //bodyparser
@@ -16,19 +17,25 @@ var jsonParser = body_parser_1.default.json();
 // is mounted on in the server.ts file.
 // In this case it's /welcome
 // rpidej body parser
-router.post('/usacek', jsonParser, function (req, res) {
-    //nacti data z requestu
-    if (!req.body)
-        return res.status(400);
-    var data = req.body;
-    console.log(data);
-    // pridat do db pomoci funkce a vypsat zpet na obr.
-    data = res.send(db_1.insert(data));
-});
-router.get('/usacek', function (req, res) {
+// router.post('/usacek',jsonParser, (req: Request, res: Response) => {
+//     //nacti data z requestu
+//     if (!req.body) return res.status(400);
+//      let data = req.body;
+//     console.log(data);
+//     // pridat do db pomoci funkce a vypsat zpet na obr.
+//     data = res.send(insert(data));
+// });
+// router.get('/usacek', (req: Request, res: Response) => {
+//      //if (data) return res.send({"data":"no records"});
+//      console.log(select());
+//     res.send(select());
+// });
+router.get('/', function (req, res) {
     //if (data) return res.send({"data":"no records"});
-    console.log(db_1.select());
-    res.send(db_1.select());
+    console.log(db2_1.default());
+    res.setHeader('Content-Type', 'application/json');
+    // res.send(select());
+    res.send(JSON.stringify(data_1.dny));
 });
 // router.get('/:name', (req: Request, res: Response) => {
 //     // Extract the name from the request parameters
