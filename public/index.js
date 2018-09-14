@@ -15,31 +15,37 @@
 
 let url = 'http://localhost:3000';
 
-// fetch(url)
-// .then(res => res.json())
-// .then((out) => {
-//   console.log('Checkout this JSON! ', out);
-// })
-// .catch(err => { throw err });
 
-(function ($){
-$(document).ready(function(){
-	//this is our JSON (data)
+$(function(){
+    $.getJSON(url, function(data){
+       
+         console.log(data);
+        //data = {kdo:"Janik"};
+        var template = $('#template').html();
+        var output = Mustache.render(template, data);
+        $('#container').html(output);
 
-	data = fetch(url)
-    .then(res =>  res.json())
-    .then(json => $.parse.JSON(json))
-    .then(out => console.log(out.datum))
-    .catch(err => { throw err });
-	//get a reference to our HTML template
+    })
+
+});
+// 	// data = fetch(url)
+//     // .then(res =>  res.json())
+//     // .then(json => $.parse.JSON(json))
+//     // .then(out => console.log(out.datum))
+//     // .catch(err => { throw err });
+// 	// //get a reference to our HTML template
+//      $.getJSON(url, function(json){
+//         console.log(json);
+//         console.log(JSON.stringify(json));
+//      }).then(function())
+// 	//tell Mustache.js to iterate through the JSON and insert the data into the HTML template
+//     var template = $('#template').html();
+//     output = Mustache.to_html(template, JSON.stringify(data));
+//         console.log(data);
+// 	//append the HTML template to the DOM
+//     $('#container').html(output);
+
+    
+// })});
 
 
-
-
-	//tell Mustache.js to iterate through the JSON and insert the data into the HTML template
-    var template = $('#template').html();
-    output = Mustache.to_html(template, data);
-       // console.log(data.kdo);
-	//append the HTML template to the DOM
-	$('#container').html(output);
-})})(jQuery);

@@ -11,20 +11,23 @@ const config = {
     idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
   }
 
-const client = new Client(config);
 
+async function select():Promise<string> {
+  const client = new Client(config);
 client.connect();
-async function select() {
-    
-    try {
+   try {
       
-      const  resp = await client.query('SELECT * FROM test.usacek');
+      const resp = await client.query('SELECT * FROM test.usacek');
+      return JSON.stringify(resp.rows)
       console.log(JSON.stringify(resp.rows));
+      
     } catch (err) {
       console.log('Database ' + err);
-      
+      return err
     }
-    client.end();
+  // client.end();
   }
+//console.log(select());
+
 export default select;
   

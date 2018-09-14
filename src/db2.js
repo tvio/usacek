@@ -45,29 +45,29 @@ var config = {
     max: 10,
     idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
 };
-var client = new Client(config);
-client.connect();
 function select() {
     return __awaiter(this, void 0, void 0, function () {
-        var resp, err_1;
+        var client, resp, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, client.query('SELECT * FROM test.usacek')];
+                    client = new Client(config);
+                    client.connect();
+                    _a.label = 1;
                 case 1:
-                    resp = _a.sent();
-                    console.log(JSON.stringify(resp.rows));
-                    return [3 /*break*/, 3];
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, client.query('SELECT * FROM test.usacek')];
                 case 2:
+                    resp = _a.sent();
+                    return [2 /*return*/, JSON.stringify(resp.rows)];
+                case 3:
                     err_1 = _a.sent();
                     console.log('Database ' + err_1);
-                    return [3 /*break*/, 3];
-                case 3:
-                    client.end();
-                    return [2 /*return*/];
+                    return [2 /*return*/, err_1];
+                case 4: return [2 /*return*/];
             }
         });
     });
 }
+//console.log(select());
 exports.default = select;

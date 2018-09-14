@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="cz">
 
 <head>
         
@@ -11,20 +11,25 @@
     <meta charset="utf-8">
     <title>Usacek</title>
     <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 </head>
 
 <body>
-
+ <h1>Ušáček</h1>   
+<div id="container"></div>
 <script type="text/html" id="template">
-    <h1>{{kdo}}</h1>
-    <ul>
-             
+ 
+    <ul class="list-group">
+        {{#.}}
+      <li class="list-group-item"> {{kdo}}, {{datum}}, {{pozn1}}, {{pozn2}}</li>
+            {{/.}}
     </ul>
-</script>
+          
 
 <!-- this div is empty on page load -->
-<div id="container"></div>  
+
  
 
 </body>

@@ -2,14 +2,15 @@
 
 // Import only what we need from express
 import { Router, Request, Response } from 'express';
-import bodyParser from 'body-parser';
+import * as BodyParser from 'body-parser';
 import select from "./db2";
 import {dny} from "./data";
+import { NextFunction } from 'express-serve-static-core';
 // Assign router to the express.Router() instance
 const router: Router = Router();
 
 //bodyparser
-const jsonParser = bodyParser.json();
+const jsonParser = BodyParser.json();
 
 
 // The / here corresponds to the route that the WelcomeController
@@ -35,12 +36,21 @@ const jsonParser = bodyParser.json();
 //     res.send(select());
 // });
 
-router.get('/', (req: Request, res: Response) => {
-     //if (data) return res.send({"data":"no records"});
-     console.log(select());
-     res.setHeader('Content-Type', 'application/json');
-    // res.send(select());
-    res.send(JSON.stringify(dny));
+
+router.get('/',   async (req: Request, res: Response, next: NextFunction) => {
+     
+     //console.log(select());
+        try {
+        const data =  await select();
+        console.log(JSON.stringify(data));
+        if (!data) return res.send({"data":"no records"});
+        res.send(data);
+       //next();
+     } catch (e) {
+        next(e)
+     }
+      
+
 });
 
 
