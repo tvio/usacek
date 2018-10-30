@@ -19,7 +19,7 @@ client.connect();
       
       const resp = await client.query('SELECT * FROM test.usacek');
       return JSON.stringify(resp.rows)
-      console.log(JSON.stringify(resp.rows));
+      //console.log(JSON.stringify(resp.rows));
       
     } catch (err) {
       console.log('Database ' + err);

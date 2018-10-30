@@ -17,21 +17,21 @@
 </head>
 
 <body>
- <h1>Ušáček</h1>   
+ <h1>Ušáček X</h1>   
+
+
 <div id="container"></div>
 <script type="text/html" id="template">
- 
-    <ul class="list-group">
-        {{#.}}
-      <li class="list-group-item"> {{kdo}}, {{datum}}, {{pozn1}}, {{pozn2}}</li>
-            {{/.}}
-    </ul>
-          
-
-<!-- this div is empty on page load -->
-
- 
-
+   {{#rozpis}}
+    <li> 
+   {{kdo}}
+   {{formattedTime}}
+   {{pozn1}}
+   {{pozn2}}
+    </li>
+   {{/rozpis}}
+    
+</div>
 </body>
   
 </html>

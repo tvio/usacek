@@ -18,16 +18,32 @@ let url = 'http://localhost:3000';
 
 $(function(){
     $.getJSON(url, function(data){
-       
+         //formattedTime = moment(data.datum).format('DD.MM.YYYY');
          console.log(data);
+    
+        //   obj =  {rozpis:{
+        //     id_den : data.id_den,
+        //     kdo : data.kdo,
+        //    // datum:  moment(data.datum).format('DD.MM.YYYY'),
+        //     pozn1: data.pozn1,
+        //     pozn2: data.pozn2}};
+          for (i in data) {
+              data[i].datum = moment(data[i].datum).format('DD.MM.YYYY');
+              
+              //data[i].den =moment(data[i].datum).day();
+
+          };
+          obj = {rozpis:{data}};
+         console.log(obj);
         //data = {kdo:"Janik"};
+
         var template = $('#template').html();
-        var output = Mustache.render(template, data);
-        $('#container').html(output);
+        var output = Mustache.render(template,obj );
+        $('#container').append(output);
 
     })
-
 });
+
 // 	// data = fetch(url)
 //     // .then(res =>  res.json())
 //     // .then(json => $.parse.JSON(json))
