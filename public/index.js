@@ -11,9 +11,16 @@
 
 // jQuery('#messages').append(html);
 
-
+$(document).ready(function (){
+    $("#click").click(function (){
+        $('html, body').animate({
+            scrollTop: $("#container").offset().top
+        }, 2000);
+    });
+});
 
 let url = 'http://localhost:3000';
+
 
 
 $(function(){
@@ -28,11 +35,12 @@ $(function(){
         //     pozn1: data.pozn1,
         //     pozn2: data.pozn2}};
           for (i in data) {
-              data[i].datum = moment(data[i].datum).format('DD.MM.YYYY');
-              
-              //data[i].den =moment(data[i].datum).day();
-
-          };
+              //data[i].datum = moment(data[i].datum).format('DD.MM.YYYY');
+               data[i].den = moment(data[i].datum).format('dddd');
+               data[i].datumformatted = moment(data[i].datum).format('DD.MM.YYYY'); 
+               if(data[i].kdo  == 'Jana'){
+                data[i].color = true;};
+               };
           obj = {rozpis:{data}};
          console.log(obj);
         //data = {kdo:"Janik"};
@@ -43,6 +51,10 @@ $(function(){
 
     })
 });
+
+
+
+
 
 // 	// data = fetch(url)
 //     // .then(res =>  res.json())
