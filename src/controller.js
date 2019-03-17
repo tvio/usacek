@@ -42,15 +42,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 // Import only what we need from express
 var express_1 = require("express");
 var BodyParser = __importStar(require("body-parser"));
-var db2_1 = __importDefault(require("./db2"));
+var db2_1 = require("./db2");
 // Assign router to the express.Router() instance
 var router = express_1.Router();
 //bodyparser
@@ -78,7 +75,7 @@ router.get('/', function (req, res, next) { return __awaiter(_this, void 0, void
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, db2_1.default()];
+                return [4 /*yield*/, db2_1.select()];
             case 1:
                 data = _a.sent();
                 console.log(JSON.stringify(data));
@@ -89,6 +86,28 @@ router.get('/', function (req, res, next) { return __awaiter(_this, void 0, void
             case 2:
                 e_1 = _a.sent();
                 next(e_1);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+router.put('/:id', function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
+    var data, e_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, db2_1.update(req.body.id, req.body.kdo, req.body.pozn1, req.body.pozn2)];
+            case 1:
+                data = _a.sent();
+                console.log(JSON.stringify(data));
+                if (!data)
+                    return [2 /*return*/, res.send({ "data": "no records" })];
+                res.send(data);
+                return [3 /*break*/, 3];
+            case 2:
+                e_2 = _a.sent();
+                next(e_2);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

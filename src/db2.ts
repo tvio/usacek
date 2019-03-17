@@ -1,3 +1,5 @@
+import { ENGINE_METHOD_NONE, EACCES } from "constants";
+
 const {Client} = require ('pg');
 
 
@@ -12,7 +14,7 @@ const config = {
   }
 
 
-async function select():Promise<string> {
+export async function select():Promise<string> {
   const client = new Client(config);
 client.connect();
    try {
@@ -29,5 +31,22 @@ client.connect();
   }
 //console.log(select());
 
-export default select;
-  
+export async function update(id: number,kdo: number, pozn1: String, pozn2: String):Promise<string> {
+  const client = new Client(config);
+client.connect();
+   try {
+      
+      const resp = await client.query(`update test.usacek set kdo=${kdo},pozn1='${pozn1}',pozn2='${pozn2}' where id = ${id}`);
+            return JSON.stringify(resp.rows)
+      //console.log(JSON.stringify(resp.rows));
+      
+    } catch (err) {
+      console.log('Database ' + err);
+      return err
+    }
+  // client.end();
+  }
+//console.log(select());
+
+
+update(1,2, "x","x2");

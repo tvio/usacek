@@ -3,7 +3,7 @@
 // Import only what we need from express
 import { Router, Request, Response } from 'express';
 import * as BodyParser from 'body-parser';
-import select from "./db2";
+import {select, update} from "./db2";
 import {dny} from "./data";
 import { NextFunction } from 'express-serve-static-core';
 // Assign router to the express.Router() instance
@@ -53,7 +53,20 @@ router.get('/',   async (req: Request, res: Response, next: NextFunction) => {
 
 });
 
+router.put('/:id',   async (req: Request, res: Response, next: NextFunction) => {
+     
+         try {
+      const data =  await update(req.body.id,req.body.kdo, req.body.pozn1,req.body.pozn2);
+      console.log(JSON.stringify(data));
+      if (!data) return res.send({"data":"no records"});
+      res.send(data);
+     //next();
+   } catch (e) {
+      next(e)
+   }
+    
 
+});
 // router.get('/:name', (req: Request, res: Response) => {
 //     // Extract the name from the request parameters
 //     let { name } = req.params;

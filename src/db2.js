@@ -71,5 +71,34 @@ function select() {
         });
     });
 }
+exports.select = select;
 //console.log(select());
-exports.default = select;
+function update(id, kdo, pozn1, pozn2) {
+    return __awaiter(this, void 0, void 0, function () {
+        var client, resp, err_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    client = new Client(config);
+                    client.connect();
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, client.query("update test.usacek set kdo=" + kdo + ",pozn1='" + pozn1 + "',pozn2='" + pozn2 + "' where id = " + id)];
+                case 2:
+                    resp = _a.sent();
+                    return [2 /*return*/, JSON.stringify(resp.rows)
+                        //console.log(JSON.stringify(resp.rows));
+                    ];
+                case 3:
+                    err_2 = _a.sent();
+                    console.log('Database ' + err_2);
+                    return [2 /*return*/, err_2];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.update = update;
+//console.log(select());
+update(1, 2, "x", "x2");
