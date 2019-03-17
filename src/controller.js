@@ -91,19 +91,26 @@ router.get('/', function (req, res, next) { return __awaiter(_this, void 0, void
         }
     });
 }); });
-router.put('/:id', function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
-    var data, e_2;
+router.put('/:id', jsonParser, function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
+    var data, ret, e_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
+                // nacti data z requestu
+                if (!req.body)
+                    return [2 /*return*/, res.status(400)];
+                data = req.body;
                 return [4 /*yield*/, db2_1.update(req.body.id, req.body.kdo, req.body.pozn1, req.body.pozn2)];
             case 1:
-                data = _a.sent();
-                console.log(JSON.stringify(data));
-                if (!data)
-                    return [2 /*return*/, res.send({ "data": "no records" })];
-                res.send(data);
+                ret = _a.sent();
+                console.log(JSON.stringify(ret));
+                if (!ret)
+                    return [2 /*return*/, res.send({ "error": "ID neexistuje" })];
+                // TODO nevraci nic
+                //OTDO pridat selectby id
+                console.log(ret);
+                res.send(ret);
                 return [3 /*break*/, 3];
             case 2:
                 e_2 = _a.sent();

@@ -45,6 +45,7 @@ var config = {
     max: 10,
     idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
 };
+//export async function selectById
 function select() {
     return __awaiter(this, void 0, void 0, function () {
         var client, resp, err_1;
@@ -87,9 +88,9 @@ function update(id, kdo, pozn1, pozn2) {
                     return [4 /*yield*/, client.query("update test.usacek set kdo=" + kdo + ",pozn1='" + pozn1 + "',pozn2='" + pozn2 + "' where id = " + id)];
                 case 2:
                     resp = _a.sent();
-                    return [2 /*return*/, JSON.stringify(resp.rows)
-                        //console.log(JSON.stringify(resp.rows));
-                    ];
+                    //TODO pridat select by id
+                    console.log('db vrac' + resp);
+                    return [2 /*return*/, JSON.stringify(resp)];
                 case 3:
                     err_2 = _a.sent();
                     console.log('Database ' + err_2);
@@ -101,4 +102,4 @@ function update(id, kdo, pozn1, pozn2) {
 }
 exports.update = update;
 //console.log(select());
-update(1, 2, "x", "x2");
+//update(1,2, "x","x2");

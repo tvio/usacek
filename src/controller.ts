@@ -53,13 +53,21 @@ router.get('/',   async (req: Request, res: Response, next: NextFunction) => {
 
 });
 
-router.put('/:id',   async (req: Request, res: Response, next: NextFunction) => {
+router.put('/:id',jsonParser, async (req: Request, res: Response, next: NextFunction) => {
      
          try {
-      const data =  await update(req.body.id,req.body.kdo, req.body.pozn1,req.body.pozn2);
-      console.log(JSON.stringify(data));
-      if (!data) return res.send({"data":"no records"});
-      res.send(data);
+        // nacti data z requestu
+          if (!req.body) return res.status(400);
+         let data = req.body;
+    
+
+        const ret  = await update(req.body.id,req.body.kdo, req.body.pozn1,req.body.pozn2);
+      console.log(JSON.stringify(ret));
+       if (!ret) return res.send({"error" : "ID neexistuje"});
+      // TODO nevraci nic
+      //OTDO pridat selectby id
+      console.log(ret); 
+       res.send(ret);
      //next();
    } catch (e) {
       next(e)

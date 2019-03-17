@@ -13,6 +13,7 @@ const config = {
     idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
   }
 
+//export async function selectById
 
 export async function select():Promise<string> {
   const client = new Client(config);
@@ -37,8 +38,9 @@ client.connect();
    try {
       
       const resp = await client.query(`update test.usacek set kdo=${kdo},pozn1='${pozn1}',pozn2='${pozn2}' where id = ${id}`);
-            return JSON.stringify(resp.rows)
-      //console.log(JSON.stringify(resp.rows));
+      //TODO pridat select by id
+      console.log('db vrac'+resp)      
+      return JSON.stringify(resp)
       
     } catch (err) {
       console.log('Database ' + err);
@@ -49,4 +51,4 @@ client.connect();
 //console.log(select());
 
 
-update(1,2, "x","x2");
+//update(1,2, "x","x2");
