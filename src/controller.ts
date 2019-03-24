@@ -3,7 +3,7 @@
 // Import only what we need from express
 import { Router, Request, Response } from 'express';
 import * as BodyParser from 'body-parser';
-import {select, update} from "./db2";
+import {select, update, selectByID} from "./db2";
 import {dny} from "./data";
 import { NextFunction } from 'express-serve-static-core';
 // Assign router to the express.Router() instance
@@ -37,12 +37,12 @@ const jsonParser = BodyParser.json();
 // });
 
 
-router.get('/',   async (req: Request, res: Response, next: NextFunction) => {
+router.get('/usacek',   async (req: Request, res: Response, next: NextFunction) => {
      
      //console.log(select());
         try {
         const data =  await select();
-        console.log(JSON.stringify(data));
+        console.log(data);
         if (!data) return res.send({"data":"no records"});
         res.send(data);
        //next();
@@ -53,17 +53,36 @@ router.get('/',   async (req: Request, res: Response, next: NextFunction) => {
 
 });
 
-router.put('/:id',jsonParser, async (req: Request, res: Response, next: NextFunction) => {
+router.get('/usacek/:id',  async (req: Request, res: Response, next: NextFunction) => {
+     
+   //console.log(select());
+      try {
+      const data =  await selectByID(req.params.id);
+      console.log(data);
+      if (!data) return res.send({"data":"no records"});
+      res.send(data);
+     //next();
+   } catch (e) {
+      next(e)
+   }
+    
+
+});
+
+router.put('/usacek/:id',jsonParser, async (req: Request, res: Response, next: NextFunction) => {
      
          try {
         // nacti data z requestu
           if (!req.body) return res.status(400);
+          if (req.params.id != req.body.id) return res.status(400).send({"error":"nesedí id v body a parametru"});
          let data = req.body;
     
+            
+        const ret  = await update(req.params.id,req.body.kdo, req.body.pozn1,req.body.pozn2);
+      console.log(ret);
+       
+      if (!ret) return res.send({"error" : "ID neexistuje"});
 
-        const ret  = await update(req.body.id,req.body.kdo, req.body.pozn1,req.body.pozn2);
-      console.log(JSON.stringify(ret));
-       if (!ret) return res.send({"error" : "ID neexistuje"});
       // TODO nevraci nic
       //OTDO pridat selectby id
       console.log(ret); 
@@ -84,7 +103,11 @@ router.put('/:id',jsonParser, async (req: Request, res: Response, next: NextFunc
 // });
 
 
+// router.use((req: Request, res: Response, next: NextFunction) => {
+     
+// res.status(404).send({"error":"nesedí URL"});
 
+// });
 
 // Export the express.Router() instance to be used by server.ts
 export const Controller: Router = router;

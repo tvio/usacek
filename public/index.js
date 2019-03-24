@@ -19,7 +19,7 @@ $(document).ready(function (){
     });
 });
 
-let url = 'http://localhost:3000';
+let url = 'localhost:3000/usacek';
 
 
 
