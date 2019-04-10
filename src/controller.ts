@@ -42,7 +42,7 @@ router.get('/usacek',   async (req: Request, res: Response, next: NextFunction) 
      //console.log(select());
         try {
         const data =  await select();
-        console.log(data);
+        //console.log(data);
         if (!data) return res.send({"data":"no records"});
         res.send(data);
        //next();
@@ -74,12 +74,13 @@ router.put('/usacek/:id',jsonParser, async (req: Request, res: Response, next: N
          try {
         // nacti data z requestu
           if (!req.body) return res.status(400);
-          if (req.params.id != req.body.id) return res.status(400).send({"error":"nesedí id v body a parametru"});
+         // if (req.params.id != req.body.id) return res.status(400).send({"error":"nesedí id v body a parametru"});
          let data = req.body;
     
-            
-        const ret  = await update(req.params.id,req.body.kdo, req.body.pozn1,req.body.pozn2);
-      console.log(ret);
+         console.log(req.body.kdo+','+req.body.datum+','+req.params.id)    
+        const ret  = await update(req.params.id,req.body.datum,req.body.kdo, req.body.pozn1,req.body.pozn2);
+        
+        console.log(ret);
        
       if (!ret) return res.send({"error" : "ID neexistuje"});
 

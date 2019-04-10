@@ -78,7 +78,7 @@ router.get('/usacek', function (req, res, next) { return __awaiter(_this, void 0
                 return [4 /*yield*/, db2_1.select()];
             case 1:
                 data = _a.sent();
-                console.log(data);
+                //console.log(data);
                 if (!data)
                     return [2 /*return*/, res.send({ "data": "no records" })];
                 res.send(data);
@@ -122,10 +122,9 @@ router.put('/usacek/:id', jsonParser, function (req, res, next) { return __await
                 // nacti data z requestu
                 if (!req.body)
                     return [2 /*return*/, res.status(400)];
-                if (req.params.id != req.body.id)
-                    return [2 /*return*/, res.status(400).send({ "error": "nesedí id v body a parametru" })];
                 data = req.body;
-                return [4 /*yield*/, db2_1.update(req.params.id, req.body.kdo, req.body.pozn1, req.body.pozn2)];
+                console.log(req.body.kdo + ',' + req.body.datum + ',' + req.params.id);
+                return [4 /*yield*/, db2_1.update(req.params.id, req.body.datum, req.body.kdo, req.body.pozn1, req.body.pozn2)];
             case 1:
                 ret = _a.sent();
                 console.log(ret);

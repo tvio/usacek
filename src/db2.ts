@@ -1,4 +1,5 @@
 import { ENGINE_METHOD_NONE, EACCES } from "constants";
+import moment  from 'moment';
 
 const {Client} = require ('pg');
 
@@ -56,12 +57,14 @@ client.connect();
   }
 //console.log(select());
 
-export async function update(id: number,kdo: number, pozn1: String, pozn2: String):Promise<string> {
+export async function update(id: number,datum: Date, kdo: number, pozn1: String, pozn2: String):Promise<string> {
   const client = new Client(config);
+  //let d = moment().format("2019-01-01");
+  //console.log(d);
 client.connect();
    try {
       
-      const resp = await client.query(`update test.usacek set kdo=${kdo},pozn1='${pozn1}',pozn2='${pozn2}' where id = ${id}`);
+      const resp = await client.query(`update test.usacek set kdo='${kdo}', datum='${datum}',pozn1='${pozn1}',pozn2='${pozn2}' where id = ${id}`);
       const resp2 = await selectByID(id);
       console.log('db vrac'+resp2)      
       return resp2
