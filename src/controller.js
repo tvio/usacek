@@ -122,9 +122,10 @@ router.put('/usacek/:id', jsonParser, function (req, res, next) { return __await
                 // nacti data z requestu
                 if (!req.body)
                     return [2 /*return*/, res.status(400)];
+                // if (req.params.id != req.body.id) return res.status(400).send({"error":"nesedí id v body a parametru"});
+                console.log(req.body.kdo + ',' + req.body.pozn1 + ',' + req.body.pozn2 + ',' + req.params.id);
                 data = req.body;
-                console.log(req.body.kdo + ',' + req.body.datum + ',' + req.params.id);
-                return [4 /*yield*/, db2_1.update(req.params.id, req.body.datum, req.body.kdo, req.body.pozn1, req.body.pozn2)];
+                return [4 /*yield*/, db2_1.update(req.params.id, req.body.kdo, req.body.pozn1, req.body.pozn2)];
             case 1:
                 ret = _a.sent();
                 console.log(ret);

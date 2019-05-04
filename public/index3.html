@@ -14,6 +14,7 @@
             <tr>
                 <th>Kdo</th>
                 <th>Datum</th>
+                <th>Den</th>
                 <th>Pozn1</th>
                 <th>Pozn2</th>
             </tr>
@@ -22,6 +23,7 @@
             <tr>
                     <th>Kdo</th>
                     <th>Datum</th>
+                    <th>Den</th>
                     <th>Pozn1</th>
                     <th>Pozn2</th>
             </tr>
@@ -43,9 +45,10 @@
                 <div class="form-group"></div> 
                 <form id="form">
                 <label>Kdo</label>
-                <select class="form-control" id="sel1">
-                        <option>Janik</option>
-                        <option>Dalibor</option>
+                    <select class="form-control" id="sel">
+                        <option value="2">Dalibor</option>  
+                      <option value="1">Janik</option>
+                        
                       </select>
                 <!-- <input name="kdo" type="text" id="kdo" class="form-control"> -->
                 <label>Datum</label>
@@ -61,7 +64,9 @@
         </div>
               <div class="modal-footer">   
               <button type="button" class="btn btn-danger" data-dismiss="modal">Zavřít</button>
-              <button type="button" class="btn btn-success">Uložit</button>
+              <div id="ulozit">
+              <button type="button" class="btn btn-success"  >Uložit</button>
+              </div>
               </div>   
         </div>
            </div>

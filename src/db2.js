@@ -107,7 +107,7 @@ function selectByID(id) {
 }
 exports.selectByID = selectByID;
 //console.log(select());
-function update(id, datum, kdo, pozn1, pozn2) {
+function update(id, kdo, pozn1, pozn2) {
     return __awaiter(this, void 0, void 0, function () {
         var client, resp, resp2, err_3;
         return __generator(this, function (_a) {
@@ -120,7 +120,7 @@ function update(id, datum, kdo, pozn1, pozn2) {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, client.query("update test.usacek set kdo='" + kdo + "', datum='" + datum + "',pozn1='" + pozn1 + "',pozn2='" + pozn2 + "' where id = " + id)];
+                    return [4 /*yield*/, client.query("update test.usacek set kdo='" + kdo + "',pozn1='" + pozn1 + "',pozn2='" + pozn2 + "' where id = " + id)];
                 case 2:
                     resp = _a.sent();
                     return [4 /*yield*/, selectByID(id)];

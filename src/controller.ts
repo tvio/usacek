@@ -75,10 +75,11 @@ router.put('/usacek/:id',jsonParser, async (req: Request, res: Response, next: N
         // nacti data z requestu
           if (!req.body) return res.status(400);
          // if (req.params.id != req.body.id) return res.status(400).send({"error":"nesedí id v body a parametru"});
-         let data = req.body;
+        
     
-         console.log(req.body.kdo+','+req.body.datum+','+req.params.id)    
-        const ret  = await update(req.params.id,req.body.datum,req.body.kdo, req.body.pozn1,req.body.pozn2);
+         console.log(req.body.kdo+','+req.body.pozn1+','+req.body.pozn2+','+req.params.id);
+         let data = req.body;
+         const ret  = await update(req.params.id,req.body.kdo, req.body.pozn1,req.body.pozn2);
         
         console.log(ret);
        
