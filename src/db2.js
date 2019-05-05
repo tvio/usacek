@@ -68,7 +68,7 @@ function select() {
                 case 2:
                     resp = _a.sent();
                     return [2 /*return*/, JSON.stringify(resp.rows)
-                        //console.log(JSON.stringify(resp.rows));
+                        // console.log(JSON.stringify(resp.rows));
                     ];
                 case 3:
                     err_1 = _a.sent();

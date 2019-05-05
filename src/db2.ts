@@ -30,7 +30,7 @@ export async function select():Promise<string> {
  try{
       const resp = await client.query('SELECT * FROM test.usacek');
       return JSON.stringify(resp.rows)
-      //console.log(JSON.stringify(resp.rows));
+     // console.log(JSON.stringify(resp.rows));
       
     } catch (err) {
       console.log('Database ' + err);

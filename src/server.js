@@ -19,7 +19,7 @@ var options = {
     allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
     credentials: true,
     methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-    origin: "http://localhost:3000",
+    origin: "http://192.168.1.7:3000",
     preflightContinue: false
 };
 app.use(cors_1.default(options));
@@ -32,5 +32,5 @@ app.use(express_1.default.static(publicPath));
 // Serve the application at the given port
 app.listen(port, function () {
     // Success callback
-    console.log("Listening at http://localhost:" + port + "/");
+    console.log("Listening at http://192.168.1.7:" + port + "/");
 });

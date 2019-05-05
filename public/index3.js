@@ -1,24 +1,29 @@
 
-var dny = ['Neděle','Pondělí','Úterý','Středa','Čtvrtek','Pátek','Sobota'];
+var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
+
 
     $(document).ready(function() {
         
+        $.fn.dataTable.moment( 'YYYMMDD' );
+        
             var table = $('#primetable').DataTable( {
            filter: true,
-            order: [0,"desc"],
+            order: [1,"asc"],
             processing: true,
             serverSide: false,
-            ajax:{url:"http://localhost:3000/usacek",dataSrc:""},
+            ajax:{url:"http://192.168.1.7:3000/usacek",dataSrc:""},
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             type: "GET",
             columns: [
                 {  data: "kdo",
                 render: function (val,type,row)
-                    {return val==1 ?"Janik":"Dalibor" }},
+                     {return val==1 ?"Janik":"Dalibor" }},
+                  //  {return val}},
                 { data: "datum",
-                 render: function (val, type, row)
-                    {return moment(val).format('DD.MM.YYYY')}},
+                  render: function (val, type, row)
+                   {return moment(val).format('YYYYMMDD')}},
+                   
                 { data :"datum",
                    render: function (val,typ,row)
                    {   x = moment(val).toDate();
@@ -30,7 +35,24 @@ var dny = ['Neděle','Pondělí','Úterý','Středa','Čtvrtek','Pátek','Sobota
             ],
             select: true           
         } );
+        
+        
+                // var today = new Date();
+                //  var dd = today.getDate();
+                //  var mm = today.getMonth()+1; //January is 0
+                //  var yyyy = today.getFullYear();
  
+                //  if(dd<10) {
+                //      dd='0'+dd
+                //  }
+ 
+                //  if(mm<10) {
+                //      mm='0'+mm
+                //  }
+                //  today = yyyy+"-"+mm+"-"+dd;
+                //  var data = ['Dalibor','20190118','Pá'];
+                //  table.page.jumpToData(data[0], 1);
+
         var id;
         $('#primetable tbody').on( 'click', 'tr', function () {
    console.log( table.row( this ).data() );
@@ -71,7 +93,7 @@ $('#ulozit').click(function(){
     let data = JSON.stringify({kdo,pozn1, pozn2});
             console.log(data);
     $.ajax({
-        url: 'http://localhost:3000/usacek/'+id,
+        url: 'http://192.168.1.7:3000/usacek/'+id,
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',
