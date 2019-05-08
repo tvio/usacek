@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "web": "npm start",
     "test": "ts-node-dev --respawn --transpileOnly ./src/server.ts"
   },
   "author": "",
@@ -23,5 +24,8 @@
     "pg": "^7.4.3",
     "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "^3.3.3333"
+  },
+  "engines":{
+    "node": "10.x"
   }
 }

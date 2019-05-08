@@ -1,0 +1,4 @@
+{
+    "typescript.suggest.completeFunctionCalls": true,
+    "html.suggest.html5": true
+}
