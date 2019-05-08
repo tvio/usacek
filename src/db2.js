@@ -40,15 +40,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var moment_1 = __importDefault(require("moment"));
 var Client = require('pg').Client;
-var config = {
-    user: 'test',
-    database: 'test',
-    password: 'test',
-    host: 'localhost',
-    port: 5432,
-    max: 10,
-    idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
-};
+// const config = {
+//     user: 'test', // env var: PGUSER
+//     database: 'test', // env var: PGDATABASE
+//     password: 'test', // env var: PGPASSWORD
+//     host: 'localhost', // Server hosting the postgres database
+//     port: 5432, // env var: PGPORT
+//     max: 10, // max number of clients in the pool
+//     idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
+//   }
+var config = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+});
 //export async function selectById
 function select() {
     return __awaiter(this, void 0, void 0, function () {

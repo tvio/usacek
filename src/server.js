@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /* app/server.ts */
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 3000;
 // Import everything from express and assign it to the express variable
 var express_1 = __importDefault(require("express"));
 // Import WelcomeController from controllers entry point

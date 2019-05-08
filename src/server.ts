@@ -1,5 +1,5 @@
 /* app/server.ts */
-let port=process.env.PORT || 80;
+let port=process.env.PORT || 3000;
 // Import everything from express and assign it to the express variable
 import express from 'express';
 import cors from "cors"; 
@@ -44,5 +44,5 @@ app.get('/', function(req, res) {
 // Serve the application at the given port
 app.listen(port, () => {
     // Success callback
-    console.log(`Listening at http://192.168.1.7:${port}/`);
+    console.log('Appka běží');
 });
