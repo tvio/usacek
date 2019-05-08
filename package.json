@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "web": "npm start",
+    "start": "node ./src/server.js",
     "test": "ts-node-dev --respawn --transpileOnly ./src/server.ts"
   },
   "author": "",
