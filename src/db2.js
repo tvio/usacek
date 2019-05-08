@@ -34,7 +34,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var moment_1 = __importDefault(require("moment"));
 var Client = require('pg').Client;
 var config = {
     user: 'test',
@@ -48,7 +52,7 @@ var config = {
 //export async function selectById
 function select() {
     return __awaiter(this, void 0, void 0, function () {
-        var client, resp, err_1;
+        var client, resp, i, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -67,9 +71,13 @@ function select() {
                     return [4 /*yield*/, client.query('SELECT * FROM test.usacek')];
                 case 2:
                     resp = _a.sent();
-                    return [2 /*return*/, JSON.stringify(resp.rows)
-                        // console.log(JSON.stringify(resp.rows));
-                    ];
+                    for (i in resp.rows) {
+                        resp.rows[i].datum = moment_1.default(resp.rows[i].datum).format('DD.MM.YYYY');
+                        console.log(resp.rows[i].datum);
+                    }
+                    console.log(moment_1.default(resp.rows[0].datum).format('DD.MM.YYYY'));
+                    //console.log(JSON.stringify(resp.rows));
+                    return [2 /*return*/, JSON.stringify(resp.rows)];
                 case 3:
                     err_1 = _a.sent();
                     console.log('Database ' + err_1);
@@ -95,7 +103,9 @@ function selectByID(id) {
                     return [4 /*yield*/, client.query("SELECT * FROM test.usacek where id=" + id)];
                 case 2:
                     resp = _a.sent();
-                    return [2 /*return*/, JSON.stringify(resp.rows)];
+                    return [2 /*return*/, JSON.stringify(resp.rows)
+                        //console.log(JSON.stringify(resp.rows));
+                    ];
                 case 3:
                     err_2 = _a.sent();
                     console.log('Database ' + err_2);

@@ -1,10 +1,10 @@
 
-var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
 
+var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
 
     $(document).ready(function() {
         
-        $.fn.dataTable.moment( 'YYYMMDD' );
+        $.fn.dataTable.moment( 'DD.MM.YYYY' );
         
             var table = $('#primetable').DataTable( {
            filter: true,
@@ -13,6 +13,7 @@ var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
             serverSide: false,
             ajax:{url:"http://192.168.1.7:3000/usacek",dataSrc:""},
             dataType: 'json',
+            responsive:true,
             contentType: 'application/json; charset=utf-8',
             type: "GET",
             columns: [
@@ -20,38 +21,46 @@ var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
                 render: function (val,type,row)
                      {return val==1 ?"Janik":"Dalibor" }},
                   //  {return val}},
-                { data: "datum",
-                  render: function (val, type, row)
-                   {return moment(val).format('YYYYMMDD')}},
+                { data: "datum"},
+                //   render: function (val, type, row){
+                //     return moment(val).format('DD.MM.YYYY')}},
                    
                 { data :"datum",
                    render: function (val,typ,row)
-                   {   x = moment(val).toDate();
-                       return dny[x.getDay()]}},
+                   {  // x = moment(val).toDate();
+                    let den = moment(val,'DD.MM.YYYY').format('YYYY-MM-DDTHH:MM:SS.SSSZ');       
+                    return dny[moment(den).day()]}},
+                    //return dny[x.getDay()]}},
                 { data: "pozn1" },
                 { data: "pozn2" },
                 
              
-            ],
-            select: true           
+            ], 
+            pageLength: 15,           
+            select: true,
+            columnDefs: [
+                { orderable: false, targets: '_all' }
+            ] ,
+            "initComplete": function(settings, json) {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; //January is 0
+                var yyyy = today.getFullYear();
+
+                if(dd<10) {
+                    dd='0'+dd
+                }
+
+                if(mm<10) {
+                    mm='0'+mm
+                }
+                today = dd+"."+mm+"."+yyyy;
+                console.log(today);
+               table.page.jumpToData(today, 1); 
+            }         
         } );
         
-        
-                // var today = new Date();
-                //  var dd = today.getDate();
-                //  var mm = today.getMonth()+1; //January is 0
-                //  var yyyy = today.getFullYear();
- 
-                //  if(dd<10) {
-                //      dd='0'+dd
-                //  }
- 
-                //  if(mm<10) {
-                //      mm='0'+mm
-                //  }
-                //  today = yyyy+"-"+mm+"-"+dd;
-                //  var data = ['Dalibor','20190118','Pá'];
-                //  table.page.jumpToData(data[0], 1);
+                      
 
         var id;
         $('#primetable tbody').on( 'click', 'tr', function () {
@@ -63,7 +72,8 @@ var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
        console.log(data[i]+','+i);
        if (i=="datum")  {
            console.log("dostanu se na datum")
-        $('input[id="datum"]').val(moment(data[i]).format('DD.MM.YYYY'));
+       //$('input[id="datum"]').val(moment(data[i]).format('DD.MM.YYYY'));
+       $('input[id="datum"]').val(data[i]);
        } else if
         (i=="kdo") {
             $("#sel").val(data[i]);

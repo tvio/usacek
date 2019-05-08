@@ -4,7 +4,6 @@
 import { Router, Request, Response } from 'express';
 import * as BodyParser from 'body-parser';
 import {select, update, selectByID} from "./db2";
-import {dny} from "./data";
 import { NextFunction } from 'express-serve-static-core';
 // Assign router to the express.Router() instance
 const router: Router = Router();

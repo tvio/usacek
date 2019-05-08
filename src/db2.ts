@@ -29,8 +29,14 @@ export async function select():Promise<string> {
 
  try{
       const resp = await client.query('SELECT * FROM test.usacek');
-      return JSON.stringify(resp.rows)
-     // console.log(JSON.stringify(resp.rows));
+       for ( let i in resp.rows) {
+          resp.rows[i].datum = moment(resp.rows[i].datum).format('DD.MM.YYYY');
+          console.log(resp.rows[i].datum);
+      }
+      console.log (moment(resp.rows[0].datum).format('DD.MM.YYYY'));
+            //console.log(JSON.stringify(resp.rows));
+      
+            return JSON.stringify(resp.rows)
       
     } catch (err) {
       console.log('Database ' + err);
@@ -46,8 +52,8 @@ client.connect();
    try {
       
       const resp = await client.query(`SELECT * FROM test.usacek where id=${id}`);
-      return JSON.stringify(resp.rows)
-      console.log(JSON.stringify(resp.rows));
+         return JSON.stringify(resp.rows)
+      //console.log(JSON.stringify(resp.rows));
       
     } catch (err) {
       console.log('Database ' + err);
