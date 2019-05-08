@@ -11,7 +11,7 @@ var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
             order: [1,"asc"],
             processing: true,
             serverSide: false,
-            ajax:{url:"http://192.168.1.7:80/usacek",dataSrc:""},
+            ajax:{url:"https://damp-shore-50118.herokuapp.com/usacek/",dataSrc:""},
             dataType: 'json',
             responsive:true,
             contentType: 'application/json; charset=utf-8',
@@ -103,7 +103,7 @@ $('#ulozit').click(function(){
     let data = JSON.stringify({kdo,pozn1, pozn2});
             console.log(data);
     $.ajax({
-        url: 'http://192.168.1.7:80/usacek/'+id,
+        url: 'https://damp-shore-50118.herokuapp.com/usacek/'+id,
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',
