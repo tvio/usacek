@@ -117,7 +117,7 @@ $('#ulozit').click(function(){
         }
         
      });
-    table.ajax.reload(null, false);
+    table.ajax.reload();
     $('#modal').modal('hide');
  });
 
