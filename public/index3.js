@@ -12,7 +12,7 @@ var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
             order: [1,"asc"],
             processing: true,
             serverSide: false,
-            ajax:{url:urlDev,dataSrc:""},
+            ajax:{url:url,dataSrc:""},
             dataType: 'json',
             responsive:true,
             contentType: 'application/json; charset=utf-8',
@@ -104,7 +104,7 @@ $('#ulozit').click(function(){
     let data = JSON.stringify({kdo,pozn1, pozn2});
             console.log(data);
     $.ajax({
-        url: urlDev+id,
+        url: url+id,
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',
