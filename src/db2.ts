@@ -4,9 +4,14 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const {Client} = require ('pg');
-const database=process.env.PR;
+
 let config: object;
-if (process.env.NODE_ENV){
+if (process.env.DATABASE_URL){
+  config= {
+    connectionString: process.env.DATABASE_URL ,
+    ssl: true,
+  }}
+ else {
 config = {
   user: 'test', // env var: PGUSER
   database: 'test', // env var: PGDATABASE
@@ -15,13 +20,8 @@ config = {
   port: 5432, // env var: PGPORT
   max: 10, // max number of clients in the pool
   idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
-  }}
-else {
-config= {
-  connectionString: process.env.DATABASE_URL ,
-  ssl: true,
-};
-};
+  }};
+
 
 //export async function selectById
 

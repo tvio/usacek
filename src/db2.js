@@ -49,9 +49,14 @@ var moment_1 = __importDefault(require("moment"));
 var dotenv = __importStar(require("dotenv"));
 dotenv.config();
 var Client = require('pg').Client;
-var database = process.env.PR;
 var config;
-if (process.env.NODE_ENV) {
+if (process.env.DATABASE_URL) {
+    config = {
+        connectionString: process.env.DATABASE_URL,
+        ssl: true,
+    };
+}
+else {
     config = {
         user: 'test',
         database: 'test',
@@ -60,12 +65,6 @@ if (process.env.NODE_ENV) {
         port: 5432,
         max: 10,
         idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
-    };
-}
-else {
-    config = {
-        connectionString: process.env.DATABASE_URL,
-        ssl: true,
     };
 }
 ;
