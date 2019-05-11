@@ -103,7 +103,7 @@ $('#ulozit').click(function(){
     let data = JSON.stringify({kdo,pozn1, pozn2});
             console.log(data);
     $.ajax({
-        url: 'https://damp-shore-50118.herokuapp.com/usacek/'+id,
+        url: {url:"https://damp-shore-50118.herokuapp.com/usacek/"+id,dataSrc:""},
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',
