@@ -37,5 +37,5 @@ app.get('/', function (req, res) {
 // Serve the application at the given port
 app.listen(port, function () {
     // Success callback
-    console.log("Listening at http://192.168.1.7:" + port + "/");
+    console.log('Appka běží');
 });

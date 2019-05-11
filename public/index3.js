@@ -1,4 +1,5 @@
-
+let url = "https://damp-shore-50118.herokuapp.com/usacek/";
+let urlDev = "http://localhost:3000/usacek/";
 
 var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
 
@@ -11,7 +12,7 @@ var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
             order: [1,"asc"],
             processing: true,
             serverSide: false,
-            ajax:{url:"https://damp-shore-50118.herokuapp.com/usacek/",dataSrc:""},
+            ajax:{url:url,dataSrc:""},
             dataType: 'json',
             responsive:true,
             contentType: 'application/json; charset=utf-8',
@@ -67,7 +68,7 @@ var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
    console.log( table.row( this ).data() );
           let  data = table.row( this ).data();
           id = data.id;
-          console.log('idecko je '+data.id)
+          console.log('idecko je pri nacteni '+data.id)
    for (var i in data) {
        console.log(data[i]+','+i);
        if (i=="datum")  {
@@ -98,12 +99,12 @@ $('#ulozit').click(function(){
     console.log(pozn1);
     let pozn2 = $('textarea[id="pozn2"]').val();
     console.log(pozn2);
-    
+    console.log('idecko je pri ulozeni: '+id);
   //  let datum = new Date();
     let data = JSON.stringify({kdo,pozn1, pozn2});
             console.log(data);
     $.ajax({
-        url: {url:"https://damp-shore-50118.herokuapp.com/usacek/"+id,dataSrc:""},
+        url: url+id,
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',

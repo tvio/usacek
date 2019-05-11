@@ -37,22 +37,38 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var moment_1 = __importDefault(require("moment"));
+var dotenv = __importStar(require("dotenv"));
+dotenv.config();
 var Client = require('pg').Client;
-// const config = {
-//     user: 'test', // env var: PGUSER
-//     database: 'test', // env var: PGDATABASE
-//     password: 'test', // env var: PGPASSWORD
-//     host: 'localhost', // Server hosting the postgres database
-//     port: 5432, // env var: PGPORT
-//     max: 10, // max number of clients in the pool
-//     idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
-//   }
-var config = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-});
+var database = process.env.PR;
+var config;
+if (process.env.NODE_ENV) {
+    config = {
+        user: 'test',
+        database: 'test',
+        password: 'test',
+        host: 'localhost',
+        port: 5432,
+        max: 10,
+        idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
+    };
+}
+else {
+    config = {
+        connectionString: process.env.DATABASE_URL,
+        ssl: true,
+    };
+}
+;
 //export async function selectById
 function select() {
     return __awaiter(this, void 0, void 0, function () {
@@ -77,7 +93,7 @@ function select() {
                     resp = _a.sent();
                     for (i in resp.rows) {
                         resp.rows[i].datum = moment_1.default(resp.rows[i].datum).format('DD.MM.YYYY');
-                        console.log(resp.rows[i].datum);
+                        //console.log(resp.rows[i].datum);
                     }
                     console.log(moment_1.default(resp.rows[0].datum).format('DD.MM.YYYY'));
                     //console.log(JSON.stringify(resp.rows));
