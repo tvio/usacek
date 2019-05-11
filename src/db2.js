@@ -96,10 +96,12 @@ function select() {
                     }
                     console.log(moment_1.default(resp.rows[0].datum).format('DD.MM.YYYY'));
                     //console.log(JSON.stringify(resp.rows));
+                    client.end();
                     return [2 /*return*/, JSON.stringify(resp.rows)];
                 case 3:
                     err_1 = _a.sent();
                     console.log('Database ' + err_1);
+                    client.end();
                     return [2 /*return*/, err_1];
                 case 4: return [2 /*return*/];
             }
@@ -128,6 +130,7 @@ function selectByID(id) {
                 case 3:
                     err_2 = _a.sent();
                     console.log('Database ' + err_2);
+                    client.end();
                     return [2 /*return*/, err_2];
                 case 4: return [2 /*return*/];
             }
@@ -156,10 +159,12 @@ function update(id, kdo, pozn1, pozn2) {
                 case 3:
                     resp2 = _a.sent();
                     console.log('db vrac' + resp2);
+                    client.end();
                     return [2 /*return*/, resp2];
                 case 4:
                     err_3 = _a.sent();
                     console.log('Database ' + err_3);
+                    client.end();
                     return [2 /*return*/, err_3];
                 case 5: return [2 /*return*/];
             }

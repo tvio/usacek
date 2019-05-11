@@ -44,14 +44,16 @@ export async function select():Promise<string> {
       }
       console.log (moment(resp.rows[0].datum).format('DD.MM.YYYY'));
             //console.log(JSON.stringify(resp.rows));
-      
+            client.end();      
             return JSON.stringify(resp.rows)
+
       
     } catch (err) {
       console.log('Database ' + err);
+      client.end();
       return err
     }
-  // client.end();
+  
   }
 //console.log(select());
 
@@ -63,9 +65,11 @@ client.connect();
       const resp = await client.query(`SELECT * FROM test.usacek where id=${id}`);
          return JSON.stringify(resp.rows)
       //console.log(JSON.stringify(resp.rows));
+      client.end();
       
     } catch (err) {
       console.log('Database ' + err);
+      client.end();
       return err
     }
   // client.end();
@@ -81,11 +85,13 @@ client.connect();
       
       const resp = await client.query(`update test.usacek set kdo='${kdo}',pozn1='${pozn1}',pozn2='${pozn2}' where id = ${id}`);
       const resp2 = await selectByID(id);
-      console.log('db vrac'+resp2)      
+      console.log('db vrac'+resp2);
+      client.end();   
       return resp2
       
     } catch (err) {
       console.log('Database ' + err);
+      client.end();
       return err
     }
   // client.end();
