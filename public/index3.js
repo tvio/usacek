@@ -12,7 +12,7 @@ var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
             order: [1,"asc"],
             processing: true,
             serverSide: false,
-            ajax:{url:url,dataSrc:""},
+            ajax:{url:urlDev,dataSrc:""},
             dataType: 'json',
             responsive:true,
             contentType: 'application/json; charset=utf-8',
@@ -104,7 +104,7 @@ $('#ulozit').click(function(){
     let data = JSON.stringify({kdo,pozn1, pozn2});
             console.log(data);
     $.ajax({
-        url: url+id,
+        url: urlDev+id,
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',
@@ -117,7 +117,8 @@ $('#ulozit').click(function(){
         }
         
      });
-    table.ajax.reload();
+     table.clear();
+    table.ajax.reload(null,false);
     $('#modal').modal('hide');
  });
 
