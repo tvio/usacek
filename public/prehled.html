@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>Usacek</title>
+  
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css.css">
+</head>
+<body>
+    <header class="blog-header">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-4 pt-1">
+            <a class="blog-header-logo text-dark" href="#">Rozpis ušáček</a>
+          </div>
+          <div class="col-1 pt-1">
+         
+               <a class="btn btn-big btn-outline-secondary" href="logout">Odhlásit</a>
+            </div>
+              </div>
+        
+      </header>
+<hr>
+    <table id="primetable"  class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Kdo</th>
+                <th>Datum</th>
+                <th>Den</th>
+                <th>Pozn1</th>
+                <th>Pozn2</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                    <th>Kdo</th>
+                    <th>Datum</th>
+                    <th>Den</th>
+                    <th>Pozn1</th>
+                    <th>Pozn2</th>
+            </tr>
+        </tfoot>
+    </table>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="Modal-vert-center-demo-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <!-- <div class="modal-header">
+              <h5 class="modal-title" id="Modal-vert-center-demo-label"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div> -->
+           
+            <div class="modal-body">
+                <div class="form-group"></div> 
+                <form id="form">
+                <label>Kdo</label>
+                    <select class="form-control" id="sel">
+                        <option value="2">Dalibor</option>  
+                      <option value="1">Janik</option>
+                        
+                      </select>
+                <!-- <input name="kdo" type="text" id="kdo" class="form-control"> -->
+                <label>Datum</label>
+                <input name="datum" type="text" id="datum" class="form-control" readonly >
+                <label>Pozn1</label>
+                <textarea name="pozn1"  id="pozn1" class="form-control" rows="5" cols="50" wrap="soft"></textarea>
+                <!-- <input name="pozn1" type="text" id="pozn" class="form-control"> -->
+                <label>Pozn2</label>
+               <!-- <input name="pozn2" type="text" id="pozn" class="form-control"> -->
+                <textarea name="pozn2"  id="pozn2" class="form-control" rows="5" cols="50" wrap="soft"></textarea>
+            
+          </form>
+        </div>
+              <div class="modal-footer">   
+              <button type="button" class="btn btn-light" data-dismiss="modal">Zavřít</button>
+              <div id="ulozit">
+              <button type="button" class="btn btn-light"  >Uložit</button>
+              </div>
+              </div>   
+        </div>
+           </div>
+          </div>
+        
+      
+      
+
+          <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+
+ 
+       <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+       <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+       <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+      <script src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
+      <script src="https://cdn.datatables.net/plug-ins/1.10.19/api/page.jumpToData().js"></script>
+       
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
+    <script src="index3.js"></script> 
+
+
+   </body>
+
+</html>
