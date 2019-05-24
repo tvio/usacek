@@ -6,6 +6,7 @@ import * as BodyParser from 'body-parser';
 import {select, update, selectByID} from "./db2";
 import { NextFunction } from 'express-serve-static-core';
 // Assign router to the express.Router() instance
+import {email} from './email';
 const router: Router = Router();
 
 //bodyparser
@@ -34,9 +35,23 @@ const jsonParser = BodyParser.json();
 //      console.log(select());
 //     res.send(select());
 // });
+router.post('/email', jsonParser, async (req: Request, res: Response, next: NextFunction) => {
+     
+      try {
+      console.log(req.body);
+      console.log(req.body.pozn2,req.body.datum) ;  
+      email(req.body.pozn2,req.body.datum,'jana.fukalova@live.com');
+      email(req.body.pozn2,req.body.datum,'t.hajek@seznam.cz');
+      res.send('email ok');
+     //next();
+   } catch (e) {
+      next(e)
+   }
+    
 
+});
 
-router.get('/usacek',   async (req: Request, res: Response, next: NextFunction) => {
+router.get('/usacek',  async (req: Request, res: Response, next: NextFunction) => {
      
      //console.log(select());
         try {
@@ -95,6 +110,42 @@ router.put('/usacek/:id',jsonParser, async (req: Request, res: Response, next: N
     
 
 });
+
+
+// router.post('/login',jsonParser, async (req: Request, res: Response, next: NextFunction) => {
+     
+//    try {
+//   // nacti data z requestu
+//     if (!req.body) return res.status(400);
+//    // if (req.params.id != req.body.id) return res.status(400).send({"error":"nesedí id v body a parametru"});
+  
+
+//  //  console.log(req.body.jmeno+','+req.body.heslo);
+//    let jmeno = req.body.jmeno;
+//    let heslo = req.body.heslo;
+//    //console.log(jmeno+heslo);
+//    if (jmeno=='usacek' && heslo=='Lego1234'){
+      
+//       // res.render('index.html', {title: 'res vs app render'}, function(err, html) {
+//       //    console.log(html);
+//           res.send('{"done":"ok"}');
+//       next();
+//       // /res.end('{"success":"OK","status":200}');
+   
+//    }
+//    else
+//    {
+//    res.send("Nevalidní login").status(401);
+//    }
+  
+//  //next();
+// } catch (e) {
+// next(e)
+// }
+// });
+
+
+
 // router.get('/:name', (req: Request, res: Response) => {
 //     // Extract the name from the request parameters
 //     let { name } = req.params;

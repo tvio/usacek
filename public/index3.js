@@ -1,5 +1,5 @@
-let url = "https://damp-shore-50118.herokuapp.com/usacek/";
-let urlDev = "http://localhost:3000/usacek/";
+let url = "/usacek/";
+
 
 var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
 
@@ -95,6 +95,8 @@ $('#ulozit').click(function(){
     console.log("kliknuto")
     let kdo = $("#sel").val();
     console.log(kdo);
+    let datum = $("#datum").val();
+    console.log(datum);
     let pozn1 = $('textarea[id="pozn1"]').val();
     console.log(pozn1);
     let pozn2 = $('textarea[id="pozn2"]').val();
@@ -116,18 +118,28 @@ $('#ulozit').click(function(){
           //...
         }
         
-     }).done(()=>{
-     table.clear();
+     })
+     .done(()=>{table.clear()})
+     
      table.ajax.reload(null,false);
     $('#modal').modal('hide');
-     });
- });
 
-
-    
+    let data2 = JSON.stringify({pozn2,datum});
+     console.log('data pro email'+data2);
      
+
+$.ajax({
+  url:'/email',
+  type:"POST",
+  data:data2,
+  contentType:"application/json; charset=utf-8",
+  dataType:"json",
+  success: function(ok){
+      console.log(ok);}
+        })
+     });
+
     });
- 
           
 
          

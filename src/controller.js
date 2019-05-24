@@ -49,6 +49,7 @@ var express_1 = require("express");
 var BodyParser = __importStar(require("body-parser"));
 var db2_1 = require("./db2");
 // Assign router to the express.Router() instance
+var email_1 = require("./email");
 var router = express_1.Router();
 //bodyparser
 var jsonParser = BodyParser.json();
@@ -69,6 +70,22 @@ var jsonParser = BodyParser.json();
 //      console.log(select());
 //     res.send(select());
 // });
+router.post('/email', jsonParser, function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        try {
+            console.log(req.body);
+            console.log(req.body.pozn2, req.body.datum);
+            email_1.email(req.body.pozn2, req.body.datum, 'jana.fukalova@live.com');
+            email_1.email(req.body.pozn2, req.body.datum, 't.hajek@seznam.cz');
+            res.send('email ok');
+            //next();
+        }
+        catch (e) {
+            next(e);
+        }
+        return [2 /*return*/];
+    });
+}); });
 router.get('/usacek', function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
     var data, e_1;
     return __generator(this, function (_a) {
@@ -144,6 +161,31 @@ router.put('/usacek/:id', jsonParser, function (req, res, next) { return __await
         }
     });
 }); });
+// router.post('/login',jsonParser, async (req: Request, res: Response, next: NextFunction) => {
+//    try {
+//   // nacti data z requestu
+//     if (!req.body) return res.status(400);
+//    // if (req.params.id != req.body.id) return res.status(400).send({"error":"nesedí id v body a parametru"});
+//  //  console.log(req.body.jmeno+','+req.body.heslo);
+//    let jmeno = req.body.jmeno;
+//    let heslo = req.body.heslo;
+//    //console.log(jmeno+heslo);
+//    if (jmeno=='usacek' && heslo=='Lego1234'){
+//       // res.render('index.html', {title: 'res vs app render'}, function(err, html) {
+//       //    console.log(html);
+//           res.send('{"done":"ok"}');
+//       next();
+//       // /res.end('{"success":"OK","status":200}');
+//    }
+//    else
+//    {
+//    res.send("Nevalidní login").status(401);
+//    }
+//  //next();
+// } catch (e) {
+// next(e)
+// }
+// });
 // router.get('/:name', (req: Request, res: Response) => {
 //     // Extract the name from the request parameters
 //     let { name } = req.params;
