@@ -45,9 +45,10 @@ const path = require ('path');
 
 app.use(Session({
     secret: 'keyboard cat',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    // cookie: { maxAge: 600000 },
+    unset: 'destroy'
   //  saveUninitialized: false,
 }));
 app.use(function(req, res, next) {
@@ -72,6 +73,12 @@ var auth = function(req:any, res:any, next:any) {
 };
 
 
+var keep = function(req:any, res:any, next:any) {
+    if (req.session.user == "usacek")
+        return res.redirect('prehled.html');
+        else
+        return next();
+    }
 
 
 // app.use(session({
@@ -86,21 +93,7 @@ var auth = function(req:any, res:any, next:any) {
 //   }))
 
 
-
-var sessionChecker = (req:any, res:any, next:any) => {
-    if ((req.sessionID) && (req.session.user='usacek')) {
-       console.log('proveden redirect');
-        res.redirect('/prehled.html');
-    } else {
-        next();
-    }    
-};
-
-
-
-
-
- app.get('/', function(req, res) {
+ app.get('/',keep, function(req, res) {
     console.log(req.session);
     console.log(req.sessionID);
      res.sendFile(path.join(__dirname, '../login.html'));
@@ -133,21 +126,25 @@ app.post('/login',auth, function(req, res) {
     }
 });
 
-app.get('/prehled.html', auth ,(req, res,next) => {
-    console.log(req.session);
-    console.log(req.sessionID);
-});
+// app.get('/prehled.html', auth ,(req, res,next) => {
+//     console.log(req.session);
+//     console.log(req.sessionID);
+// });
 
 
 app.get('/logout', (req, res,next) => {
     
     if (req.session) {
         // delete session object
-        req.session.destroy(function(err) {
             
+        req.session.destroy(function(err) {
+        
           if(err) {
             return next(err);
           } else {
+            req.session = null;
+            res.end();
+            console.log('sezeni',req.session);
             return res.redirect('/');
           }
         });

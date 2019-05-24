@@ -41,9 +41,10 @@ var path = require('path');
 // Mount the WelcomeController at the / route
 app.use(express_session_1.default({
     secret: 'keyboard cat',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    // cookie: { maxAge: 600000 },
+    unset: 'destroy'
     //  saveUninitialized: false,
 }));
 app.use(function (req, res, next) {
@@ -60,6 +61,12 @@ var auth = function (req, res, next) {
     else
         return res.send("nee");
 };
+var keep = function (req, res, next) {
+    if (req.session.user == "usacek")
+        return res.redirect('prehled.html');
+    else
+        return next();
+};
 // app.use(session({
 //     genid: (req) => {
 //       console.log('Inside the session middleware');
@@ -70,16 +77,7 @@ var auth = function (req, res, next) {
 //     resave: false,
 //     saveUninitialized: true
 //   }))
-var sessionChecker = function (req, res, next) {
-    if ((req.sessionID) && (req.session.user = 'usacek')) {
-        console.log('proveden redirect');
-        res.redirect('/prehled.html');
-    }
-    else {
-        next();
-    }
-};
-app.get('/', function (req, res) {
+app.get('/', keep, function (req, res) {
     console.log(req.session);
     console.log(req.sessionID);
     res.sendFile(path.join(__dirname, '../login.html'));
@@ -107,10 +105,10 @@ app.post('/login', auth, function (req, res) {
         console.log(req.sessionID);
     }
 });
-app.get('/prehled.html', auth, function (req, res, next) {
-    console.log(req.session);
-    console.log(req.sessionID);
-});
+// app.get('/prehled.html', auth ,(req, res,next) => {
+//     console.log(req.session);
+//     console.log(req.sessionID);
+// });
 app.get('/logout', function (req, res, next) {
     if (req.session) {
         // delete session object
@@ -119,6 +117,9 @@ app.get('/logout', function (req, res, next) {
                 return next(err);
             }
             else {
+                req.session = null;
+                res.end();
+                console.log('sezeni', req.session);
                 return res.redirect('/');
             }
         });
