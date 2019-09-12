@@ -20,7 +20,13 @@ var dny = ['Ne','Po','Út','St','Čt','Pá','So'];
             columns: [
                 {  data: "kdo",
                 render: function (val,type,row)
-                     {return val==1 ?"Janik":"Dalibor" }},
+                     { if (val==1) {
+                        return 'Janik'
+                      } else if (val==2) {
+                        return 'Dalibor'
+                       } else {
+                        return 'N/A'
+                      } }},
                   //  {return val}},
                 { data: "datum"},
                 //   render: function (val, type, row){
